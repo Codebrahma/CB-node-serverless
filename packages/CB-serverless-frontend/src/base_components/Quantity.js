@@ -8,8 +8,8 @@ const CountSpan = styled.button`
   font-weight: bold;
   font-size: ${props => Math.max(props.size / 2, 15)}px;
   border-radius: ${props => (props.right ? '0px 4px 4px 0px' : '4px 0 0 4px')};
-  background: #f5f5f5;
-  color: ${pink600}
+  color: #f5f5f5;
+  background: ${pink600}
   
   border-style: solid;
   border-color: #ddd;
@@ -20,6 +20,7 @@ const CountSpan = styled.button`
 `;
 
 const CountInput = styled.input`
+  color: ${pink600}
   height: ${props => props.size}px;
   width: ${props => props.size + 10}px;
   border-color: #ddd;
