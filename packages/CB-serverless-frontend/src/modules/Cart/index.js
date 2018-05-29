@@ -11,7 +11,7 @@ import {
   deleteCartItem as deleteCartItemAction,
   fetchCartItems as fetchCartItemsAction,
   updateCartItemQty as updateCartItemQtyAction,
-} from '../../actions/cart';
+} from './actions/cart';
 import Home from './components/Home';
 
 /**

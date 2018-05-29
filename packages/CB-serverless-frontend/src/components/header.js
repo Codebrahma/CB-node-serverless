@@ -10,7 +10,7 @@ import { FlatButton, IconButton } from 'material-ui';
 import { Auth } from 'aws-amplify';
 import AppBar from 'material-ui/AppBar';
 import { updateAuth } from '../Auth/actionCreators';
-import { fetchCartItems } from '../actions/cart';
+import { fetchCartItems } from '../modules/Cart/actions/cart';
 import { fetchAllOrders } from '../actions/order';
 
 const AppHeader = styled(AppBar)`

@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 
 import authReducer from './Auth/authReducer';
-import cart from './reducers/cart';
+import cart from './modules/Cart/reducers/cart';
 import rootSaga from './sagas';
 import payment from './reducers/payment';
 import order from './reducers/orders';

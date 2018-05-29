@@ -10,7 +10,7 @@ import { isNil } from 'lodash/lang';
 import { withRouter } from 'react-router-dom';
 import { placeOrderAction } from '../../../actions/order';
 import { submitPaymentTokenId } from '../../../actions/payment';
-import { cleanCart } from '../../../actions/cart';
+import { cleanCart } from '../../Cart/actions/cart';
 import { displayPaymentModal } from '../../../utils/stripe-payment-modal';
 
 const BillingList = styled.ul`
