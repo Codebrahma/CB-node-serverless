@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
-import { cleanCart } from '../actions/cart';
+import { cleanCart } from '../modules/Cart/actions/cart';
 import { cleanOrder } from '../actions/order';
 import isEmpty from 'lodash/isEmpty';
 

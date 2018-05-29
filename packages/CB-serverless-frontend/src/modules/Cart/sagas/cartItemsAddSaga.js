@@ -1,6 +1,6 @@
 import { put, call, select, takeLatest } from 'redux-saga/effects';
-import CartService from '../service/cart';
-import { deDupeItems } from '../utils/array';
+import CartService from '../../../service/cart';
+import { deDupeItems } from '../../../utils/array';
 
 const userIdSelector = state => state.auth.userData && state.auth.userData.username;
 const cartItemsSelector = state => state.cart.cartData || [];

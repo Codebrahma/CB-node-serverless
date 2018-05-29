@@ -11,7 +11,7 @@ import { Card, CardActions, CardTitle, FlatButton } from 'material-ui';
 import { pink500, pink800, pinkA200 } from 'material-ui/styles/colors';
 import Quantity from '../../base_components/Quantity';
 import ProductImageWrap from '../../base_components/ProductImage';
-import { updateCartItems } from '../../actions/cart';
+import { updateCartItems } from '../../modules/Cart/actions/cart';
 
 const ItemWrap = styled(Card)`
   box-shadow: none !important;

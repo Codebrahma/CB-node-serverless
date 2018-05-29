@@ -1,5 +1,5 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import CartService from '../service/cart';
+import CartService from '../../../service/cart';
 
 const userIdSelector = state => state.auth.userData && state.auth.userData.username;
 const cartItemsSelector = state => state.cart.cartData || [];
