@@ -8,10 +8,10 @@ import { RaisedButton } from 'material-ui';
 import { bindActionCreators } from 'redux';
 import { isNil } from 'lodash/lang';
 import { withRouter } from 'react-router-dom';
-import { placeOrderAction } from '../../actions/order';
-import { submitPaymentTokenId } from '../../actions/payment';
-import { cleanCart } from '../../actions/cart';
-import {displayPaymentModal} from '../../utils/stripe-payment-modal';
+import { placeOrderAction } from '../../../actions/order';
+import { submitPaymentTokenId } from '../../../actions/payment';
+import { cleanCart } from '../../../actions/cart';
+import { displayPaymentModal } from '../../../utils/stripe-payment-modal';
 
 const BillingList = styled.ul`
   position: relative;
@@ -95,7 +95,7 @@ const TotalAmount = AmountText.extend`
 const BillReceiptWrap = styled.div`
   margin: 1em auto;
   color: #333;
-  max-width: 800px;
+  max-width: 800px; 
 `;
 
 const ReceiptTitle = styled.h2`
@@ -145,7 +145,7 @@ class BillReceipt extends PureComponent {
         nextProps,
         this.onOpenPaymentModal,
         this.onClosePaymentModal,
-        nextProps.submitPaymentTokenId
+        nextProps.submitPaymentTokenId,
       );
     }
   }
@@ -170,7 +170,7 @@ class BillReceipt extends PureComponent {
         this.props,
         this.onOpenPaymentModal,
         this.onClosePaymentModal,
-        this.props.submitPaymentTokenId
+        this.props.submitPaymentTokenId,
       ));
       return;
     }

@@ -6,7 +6,7 @@ const CartItemSkeleton = styled.div`
   background: #fff;
   background-repeat: no-repeat;
   background-image:
-            linear-gradient(90deg, rgba(243,243,243,0) 0, rgba(243,243,243,0.4) 50%,
+            linear-gradient(90deg, rgba(243,243,243,0) 0, rgba(243,243,243,0.5) 50%,
              rgba(243,243,243,0) 100%), 
             linear-gradient(#f3f3f3 80px,transparent 0), // image
             linear-gradient(#f3f3f3 25px, transparent 0), // title
@@ -14,7 +14,7 @@ const CartItemSkeleton = styled.div`
             linear-gradient(#f3f3f3 50px, transparent 0); // price
             //linear-gradient(#fff 394px, transparent 0);
   background-size:
-            800px 100%,
+            600px 100%,
             80px 80px,
             50% 25px,
             140px 60px,

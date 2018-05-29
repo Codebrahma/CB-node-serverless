@@ -1,84 +1,23 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
 import _ from 'lodash';
 
 
-import { Wrapper } from '../../base_components/index';
 import CartItem from './CartItem';
-import { deleteCartItem, fetchCartItems, updateCartItemQty } from '../../actions/cart';
-import OrderButton from '../../base_components/OrderButton';
-import { cancelOrder } from '../../actions/order';
-import { submitPaymentTokenId } from '../../actions/payment';
-
-const CartWrapper = Wrapper.extend`
-  color: #222;
-  background: #f5f5f5;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-`;
-
-const CartMain = styled.div`
-  flex: 7;
-  padding: 3em 2em;
-  background: #fff;
-  box-shadow: 0 0 10px 1px #eee;
-`;
-
-const EmptyCart = styled.div`
-  padding: 2em;
-  font-size: 20px;
-  text-align: center;
-  color: #888;
-  background: #eee;
-  margin: 4em auto 1em;
-`;
-
-const CartHead = styled.h1`
-  border-bottom: 1px solid #eee;
-  padding-bottom: 1em;
-`;
-
-const RightSideContent = styled.div`
-  margin: 0 1em;
-  flex: 2.5;
-  color: #333;
-`;
-
-const OrderPending = styled.section`
-  background: #fff;
-  padding: 1em 2em;
-
-  > h3 {
-    margin: 1em 0 2em;
-  }
-
-  > p {
-    margin: 1em 0 3em;
-    font-weight: bold;
-    color: #888;
-    letter-spacing: 0.5px;
-  }
-`;
-
-const TotalSection = styled.div`
-  margin: 2em auto;
-  font-size: 1.5em;
-  padding: 0 3em;
-  text-align: right;
-  > span:first-child{
-    margin: 0 2em;
-  }
-
-`;
+import OrderButton from '../../../base_components/OrderButton';
+import {
+  CartHead,
+  CartMain,
+  CartWrapper,
+  EmptyCart,
+  OrderPending,
+  RightSideContent,
+  TotalSection
+} from './StyledComponents';
 
 
-class CartHome extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -249,8 +188,9 @@ class CartHome extends Component {
   }
 }
 
-CartHome.propTypes = {
+Home.propTypes = {
   fetchCartItems: PropTypes.func.isRequired,
+  // fetchAllOrders: PropTypes.func.isRequired,
   deleteCartItem: PropTypes.func.isRequired,
   cancelOrder: PropTypes.func.isRequired,
   updateCartItemQty: PropTypes.func.isRequired,
@@ -263,30 +203,5 @@ CartHome.propTypes = {
   history: PropTypes.object.isRequired,
   currentOrder: PropTypes.object.isRequired,
   paymentInProgress: PropTypes.bool.isRequired,
+  paymentComplete: PropTypes.bool.isRequired,
 };
-
-
-function initMapStateToProps(state) {
-  return {
-    cartItems: state.cart.cartData || [],
-    cartItemsInfo: state.cart.cartItemsInfo || [],
-    // orderList: state.order.orderList,
-    currentOrder: state.order.currentOrder || {},
-    userData: state.auth.userData,
-    paymentComplete: state.payment.paymentComplete,
-    paymentInProgress: state.payment.paymentInProgress || false,
-  };
-}
-
-function initMapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    fetchCartItems,
-    cancelOrder,
-    deleteCartItem,
-    updateCartItemQty,
-    submitPaymentTokenId,
-  }, dispatch);
-}
-
-export default connect(initMapStateToProps, initMapDispatchToProps)(CartHome);
-// export default CartHome;

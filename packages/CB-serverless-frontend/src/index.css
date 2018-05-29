@@ -33,12 +33,6 @@ body {
     }
 }
 
-@keyframes loadingCart {
-    to {
-        background-position: 300% 0, 64px 32px, 30% 60px, 76% 50px, 85% 50px,
-        0% 0%;
-    }
-}
 @keyframes loadingSubCat {
     to {
         background-position: 150% 0, 5px 5px, 40% 10px;

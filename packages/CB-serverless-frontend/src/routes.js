@@ -11,13 +11,13 @@ import { fetchAllOrders } from './actions/order';
 import AuthModule from './Auth';
 import ProductHome from './components/Product/ProductHome';
 import { updateAuth } from './Auth/actionCreators';
-import CartHome from './components/Cart/CartHome';
+import CartModule from './modules/Cart/';
 import OrderPlaced from './components/order-placed';
 import ProfileHome from './components/ProfileHome';
-import BillReceipt from './components/Cart/BillReceipt';
 import OrderList from './components/order-list';
+import BillReceipt from './modules/Orders/components/BillReceipt';
 
-const DefaultLayout = ({component: Component, ...rest}) => (
+const DefaultLayout = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={matchProps => (
@@ -25,7 +25,8 @@ const DefaultLayout = ({component: Component, ...rest}) => (
         <Header />
         <Component {...matchProps} />
       </div>
-  )} />
+  )}
+  />
 );
 
 class Routes extends React.Component {
@@ -110,7 +111,7 @@ class Routes extends React.Component {
               <DefaultLayout exact path="/category/:category" component={CategoryItems} />
               <DefaultLayout exact path="/category/" component={CategoryItems} />
               <DefaultLayout exact path="/profile" component={ProfileHome} />
-              <DefaultLayout exact path="/cart" component={CartHome} />
+              <DefaultLayout exact path="/cart" component={CartModule} />
               <DefaultLayout exact path="/checkout" component={BillReceipt} />
               <DefaultLayout exact path="/order-placed" component={OrderPlaced} />
               <DefaultLayout exact path="/order-list" component={OrderList} />
