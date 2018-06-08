@@ -31,6 +31,10 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:DescribeStream
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:ListStreams
       Resource: "*"
   # To load environment variables externally
   # rename env.example to env.yml and uncomment
@@ -56,6 +60,10 @@ functions:
           cors: true
           authorizer:
             arn: arn:aws:cognito-idp:ap-south-1:872196253669:userpool/ap-south-1_50ZoISXiG
+  watchGroceryUpdate:
+    handler: api/groceries/processGroceriesUpdate.main
+    events: 
+      - stream: arn:aws:dynamodb:ddblocal:000000000000:table/grocery/stream/2018-05-25T07:14:11.077
   updateStock:
       handler: api/groceries/stock.updateStock
       events:

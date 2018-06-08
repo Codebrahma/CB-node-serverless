@@ -7,7 +7,8 @@ import map from 'lodash/map';
 import awsConfigUpdate from '../../utils/awsConfigUpdate';
 import getErrorResponse from '../../utils/getErrorResponse';
 import getSuccessResponse from '../../utils/getSuccessResponse';
-import { GROCERIES_TABLE_NAME, GROCERIES_TABLE_GLOBAL_INDEX_NAME, PAGINATION_DEFAULT_OFFSET } from '../../dynamoDb/constants';
+import { GROCERIES_TABLE_NAME, GROCERIES_TOP_SELLING_TABLE_NAME, GROCERIES_TABLE_GLOBAL_INDEX_NAME } from '../../dynamoDb/constants';
+import { main as processGroceries } from './processGroceriesUpdate';
 
 awsConfigUpdate();
 
@@ -61,7 +62,7 @@ export const main = (event, context, callback) => {
     }
 
     const queryPromise = documentClient.query(params).promise();
-    
+
     // Provide next Page index to frontend if more items are available
     queryPromise
       .then((data) => {
@@ -75,35 +76,22 @@ export const main = (event, context, callback) => {
         callback(null, getErrorResponse(500, 'Unable to fetch! Try again later'));
       });
   } else {
-    // If not scan and filter categories and bring the top 3 items,
-    var params = getBaseGroceriesParams();
+    const topSellingFetchParams = {
+      TableName: GROCERIES_TOP_SELLING_TABLE_NAME,
+      ExpressionAttributeNames: {
+        '#category': 'category',
+        '#groceries': 'groceries',
+      },
+      ProjectionExpression: "#category, #groceries",
+    }
+    const queryPromise = documentClient.scan(topSellingFetchParams).promise();
 
-    const queryPromise = documentClient.scan(params).promise();
-
-    // Does a pre processing to show response
     queryPromise
-      .then((data) => {
-        const uniqueCategories = _
-          .chain(data.Items)
-          .uniqBy('category')
-          .map(data => data.category)
-          .map((category) => {
-            const filteredResult = _
-              .chain(data.Items)
-              .filter(grocery => (grocery.category === category))
-              .orderBy(['soldQty'], ['desc'])
-              .take(3)
-              .value();
-
-            return {
-              category,
-              groceries: filteredResult,
-            }
-          })
-          .value();
-
-        // Sends the response
-        callback(null, getSuccessResponse(uniqueCategories))
+      .then(data => {
+        if (data.Items.length < 1) {
+          processGroceries();
+        }
+        callback(null, getSuccessResponse(data.Items));
       })
       .catch((error) => {
         callback(null, getErrorResponse(500, JSON.stringify(error.message)));
